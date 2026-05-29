@@ -3,49 +3,416 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>アドバンストレーニング｜日本史</title>
+<title>トレーニングモード｜幕末うさぎ歴史クイズ</title>
 <style>
-:root{--bg:#f6efe7;--card:#fffdf9;--line:#e5cfbb;--ink:#2d2925;--accent:#b71c1c;--blue:#1d3557;--gold:#f6c04d;--pink:#ffe4ec}
+:root {
+  --bg:#f7efdd;
+  --card:#fffaf0;
+  --line:#e6c88f;
+  --ink:#2b241f;
+  --red:#b71c1c;
+  --blue:#1d3557;
+  --gold:#ffd166;
+  --soft:#f2e2c3;
+  --green:#e7fff0;
+}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;background:linear-gradient(135deg,#fff8ef,#efe4d6);color:var(--ink);overflow-x:hidden}
-button{font:inherit}.app{max-width:1120px;margin:0 auto;padding:12px}
-.card{background:rgba(255,253,249,.96);border:2px solid var(--line);border-radius:24px;padding:18px;box-shadow:0 12px 28px rgba(0,0,0,.08)}
-.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}.logoWrap{display:flex;align-items:center;gap:12px}.logo{width:56px;height:56px;object-fit:contain}.title{font-size:clamp(27px,4vw,44px);font-weight:900;line-height:1.05}.sub{font-size:14px;font-weight:700;color:#6c5f55}.menuBtn{border:none;border-radius:14px;padding:12px 16px;background:var(--blue);color:white;font-weight:900;cursor:pointer;box-shadow:0 5px 0 #0d2035}
-.hero{display:grid;grid-template-columns:1fr 320px;gap:14px;align-items:stretch}.info{background:#fff8ea;border:2px solid #ead6c3;border-radius:22px;padding:18px}.info h2{margin:0 0 10px;font-size:clamp(34px,5vw,58px);line-height:1.05}.info p{margin:0;line-height:1.7;font-size:clamp(16px,2vw,22px);font-weight:800;color:#5b5048}
-.right{background:#fffaf4;border:2px dashed #e4cfbc;border-radius:22px;padding:16px;display:flex;flex-direction:column;justify-content:center;align-items:center}.rabbit{width:min(260px,70vw);object-fit:contain;filter:drop-shadow(0 10px 10px rgba(0,0,0,.12))}.speech{margin-top:12px;background:#fff8d8;border:3px solid #111;border-radius:18px;padding:14px;font-weight:900;line-height:1.5;text-align:center;box-shadow:4px 4px 0 #111}
-.stage{margin-top:16px;display:grid;grid-template-columns:1.1fr .9fr;gap:14px}.quiz,.panel{background:white;border:2px solid #ead6c3;border-radius:22px;padding:18px}.status{display:flex;justify-content:space-between;gap:10px;margin-bottom:12px;flex-wrap:wrap}.badge{background:#f0e3d5;border-radius:999px;padding:8px 12px;font-weight:900}.type{display:inline-block;background:#fff0f0;color:#b71c1c;border:1px solid #efbaba;border-radius:999px;padding:6px 10px;font-size:13px;font-weight:900;margin-bottom:8px}.question{font-size:clamp(22px,3vw,34px);font-weight:900;line-height:1.45;margin-bottom:14px}.choices{display:grid;gap:10px}.choice{border:2px solid #d9c7b7;background:white;border-radius:18px;padding:14px;font-weight:900;font-size:18px;text-align:left;cursor:pointer;color:#1265a8;box-shadow:0 4px 0 #d0bba8}.choice.correct{background:#e7fff0;border-color:#14824d;color:#14824d}.choice.wrong{background:#fff0f0;border-color:#c62828;color:#c62828}
-.panel h3{margin:0 0 10px;font-size:24px;color:#8a4b00}.compare{display:grid;grid-template-columns:1fr 1fr;gap:10px}.compareBox{background:#fff8ea;border:2px solid #efcf9e;border-radius:16px;padding:12px}.compareBox b{display:block;font-size:18px;margin-bottom:6px}.gaugeBox{margin-top:12px}.gaugeLabel{font-weight:900;font-size:14px;margin:8px 0 4px}.gauge{height:18px;background:#eee2d4;border-radius:999px;overflow:hidden}.gauge span{display:block;height:100%;width:0%;background:linear-gradient(90deg,#f6c04d,#b71c1c);transition:.4s}
-.explain{display:none;margin-top:14px;background:#fff8ea;border:2px solid #efcf9e;border-radius:18px;padding:14px;line-height:1.8;font-weight:800}.explain.show{display:block}.next{margin-top:14px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}.next button,.result button{border:none;border-radius:14px;padding:12px 16px;font-weight:900;cursor:pointer}.red{background:#b71c1c;color:white;box-shadow:0 5px 0 #7f1111}.blue{background:#1d3557;color:white;box-shadow:0 5px 0 #0d2035}.gold{background:#f6c04d;color:#2d2925;box-shadow:0 5px 0 #a87b00}
-.result{display:none;margin-top:16px;background:white;border:2px solid #ead6c3;border-radius:22px;padding:20px;text-align:center}.result h2{font-size:clamp(36px,5vw,58px);margin:10px 0}.scoreBig{font-size:52px;font-weight:900;color:#b71c1c}
-@media(max-width:850px){.hero,.stage{grid-template-columns:1fr}.compare{grid-template-columns:1fr}}
+html,body{margin:0;max-width:100%;overflow-x:hidden}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;
+  background:linear-gradient(135deg,#fff7eb,#f2e4d0);
+  color:var(--ink);
+}
+button{font:inherit}
+.wrap{
+  width:min(1120px, calc(100vw - 20px));
+  margin:auto;
+  padding:10px 0 24px;
+}
+.card{
+  background:rgba(255,250,240,.96);
+  border:3px solid var(--line);
+  border-radius:28px;
+  box-shadow:0 12px 30px rgba(80,50,25,.14);
+  padding:14px;
+  width:100%;
+  overflow:hidden;
+}
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:14px;
+}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.brand img{width:54px;height:54px;object-fit:contain;flex:0 0 auto}
+.title{font-size:clamp(28px,4vw,44px);font-weight:900;line-height:1.05}
+.sub{font-size:14px;color:#6b5d4a;font-weight:800}
+.nav{display:flex;gap:8px;flex-wrap:wrap}
+.nav a{
+  border:3px solid #d7b66f;
+  background:#fff;
+  border-radius:16px;
+  padding:10px 14px;
+  text-decoration:none;
+  color:#382b1d;
+  font-weight:900;
+  box-shadow:0 4px 0 rgba(0,0,0,.12);
+}
+.mainStack{display:grid;gap:14px}
+.box{
+  background:#fff;
+  border:3px solid var(--line);
+  border-radius:24px;
+  padding:16px;
+  width:100%;
+  overflow:hidden;
+}
+.status{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:12px;
+}
+.pill{
+  background:#f0e3d5;
+  border-radius:999px;
+  padding:8px 12px;
+  font-weight:900;
+}
+.question{
+  font-size:clamp(24px,4.5vw,36px);
+  font-weight:900;
+  line-height:1.35;
+  margin:10px 0 14px;
+  word-break:normal;
+  overflow-wrap:anywhere;
+}
+.choices{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.choice{
+  border:2px solid #d9c7b7;
+  background:white;
+  border-radius:18px;
+  padding:14px;
+  font-weight:900;
+  font-size:clamp(17px,2.1vw,22px);
+  text-align:left;
+  cursor:pointer;
+  color:#1265a8;
+  box-shadow:0 4px 0 #d0bba8;
+  min-height:58px;
+}
+.choice.correct{background:#e7fff0;border-color:#14824d;color:#14824d}
+.choice.wrong{background:#fff0f0;border-color:#c62828;color:#c62828}
+.controls{
+  display:flex;
+  gap:10px;
+  margin-top:12px;
+  flex-wrap:wrap;
+}
+.btn{
+  border:none;
+  border-radius:16px;
+  padding:13px 16px;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 5px 0 rgba(0,0,0,.18);
+}
+.red{background:var(--red);color:#fff}
+.blue{background:var(--blue);color:#fff}
+.gold{background:var(--gold);color:#2b241f}
+.learn{
+  display:none;
+  margin-top:12px;
+  background:#fff8ea;
+  border:2px solid #efcf9e;
+  border-radius:18px;
+  padding:14px;
+  line-height:1.7;
+  font-weight:800;
+}
+.learn.show{display:block}
+.timeline{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  padding:8px 0 4px;
+  max-width:100%;
+}
+.node{
+  flex:0 0 auto;
+  min-width:118px;
+  max-width:150px;
+  background:#eee2d4;
+  border-radius:18px;
+  padding:10px;
+  text-align:center;
+  font-weight:900;
+  color:#756455;
+  white-space:normal;
+  line-height:1.35;
+}
+.node.open{background:#fff8d8;color:#8a4b00;border:2px solid #efcf9e}
+.node.active{background:#b71c1c;color:#fff}
+.mapBox svg{
+  width:100%;
+  height:auto;
+  max-height:420px;
+  background:#f7f7f7;
+  border-radius:18px;
+  display:block;
+}
+.point{fill:#ccc;transition:.2s}
+.point.on{fill:#d62828}
+.label{font-size:12px;font-weight:900;fill:#333}
+.rabbitRow{
+  display:grid;
+  grid-template-columns:140px 1fr;
+  gap:14px;
+  align-items:center;
+}
+.rabbit{
+  width:130px;
+  max-width:100%;
+  object-fit:contain;
+  filter:drop-shadow(0 10px 10px rgba(0,0,0,.14));
+}
+.speech{
+  background:#fff8d8;
+  border:3px solid #111;
+  border-radius:18px;
+  padding:13px;
+  font-weight:900;
+  line-height:1.5;
+  box-shadow:4px 4px 0 #111;
+}
+.recapGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.recap{
+  background:#fff8ea;
+  border:2px solid #efcf9e;
+  border-radius:16px;
+  padding:12px;
+  font-weight:800;
+  line-height:1.6;
+}
+@media(max-width:760px){
+  .wrap{width:calc(100vw - 12px);padding-top:6px}
+  .card{border-radius:20px;padding:10px}
+  .top{align-items:flex-start}
+  .brand img{width:42px;height:42px}
+  .title{font-size:30px}
+  .nav{width:100%;display:grid;grid-template-columns:1fr 1fr}
+  .nav a{text-align:center;padding:9px 6px}
+  .box{padding:12px;border-radius:18px}
+  .status{gap:6px}
+  .pill{font-size:14px;padding:7px 10px}
+  .question{font-size:25px}
+  .choices{grid-template-columns:1fr}
+  .choice{font-size:20px;padding:13px;min-height:54px}
+  .node{min-width:104px;font-size:13px;padding:9px}
+  .mapBox svg{max-height:330px}
+  .rabbitRow{grid-template-columns:90px 1fr}
+  .rabbit{width:86px}
+  .speech{font-size:14px;box-shadow:3px 3px 0 #111}
+  .recapGrid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
-<div class="app"><div class="card">
-<div class="top"><div class="logoWrap"><img src="images/rabbit14.png" class="logo"><div><div class="title">アドバンストレーニング</div><div class="sub">比較・理由・因果関係で理解する</div></div></div><button class="menuBtn" onclick="location.href='index.html'">メニューへ</button></div>
-<div class="hero"><div class="info"><h2>なぜ、<br>歴史は動いたのか。</h2><p>ここでは単語を答えるだけではなく、<br>「何と何が違うのか」「なぜ考えが変わったのか」まで確認します。</p></div><div class="right"><img id="rabbit" src="images/rabbit14.png" class="rabbit"><div id="speech" class="speech">「理由」がわかると、<br>歴史は忘れにくい！</div></div></div>
-<div id="stage" class="stage"><div class="quiz"><div class="status"><div id="count" class="badge">1 / 8</div><div id="score" class="badge">正解 0</div></div><div id="type" class="type"></div><div id="question" class="question"></div><div id="choices" class="choices"></div><div id="explain" class="explain"></div><div class="next"><button class="blue" onclick="toggleExplain()">解説表示</button><button id="nextBtn" class="red" onclick="nextQ()" disabled>次へ</button></div></div>
-<div class="panel"><h3>理解サポート</h3><div id="support"></div><div class="gaugeBox"><div class="gaugeLabel">幕府への不信・緊張</div><div class="gauge"><span id="gBakufu"></span></div><div class="gaugeLabel">攘夷の熱</div><div class="gauge"><span id="gJoi"></span></div><div class="gaugeLabel">現実路線・倒幕への変化</div><div class="gauge"><span id="gChange"></span></div></div></div></div>
-<div id="result" class="result"><img src="images/rabbit01.png" class="rabbit" style="max-width:220px"><h2>アドバンス完了！</h2><div id="finalScore" class="scoreBig"></div><p style="font-size:22px;font-weight:800;line-height:1.7">次は通常クイズで、知識を一気に定着させよう。</p><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px"><button class="gold" onclick="location.href='index.html'">通常クイズへ</button><button class="blue" onclick="location.href='index2.html'">トレーニングへ</button></div></div>
-</div></div>
+<div class="wrap">
+  <div class="card">
+    <div class="top">
+      <div class="brand">
+        <img src="images/rabbit10.png" alt="うさぎ">
+        <div>
+          <div class="title">トレーニングモード</div>
+          <div class="sub">時系列・場所・？？？を少しずつ開く</div>
+        </div>
+      </div>
+      <div class="nav">
+        <a href="index.html">メニュー</a>
+        <a href="index3.html">アドバンス</a>
+      </div>
+    </div>
+
+    <div class="mainStack">
+      <section class="box">
+        <div class="status">
+          <span id="count" class="pill"></span>
+          <span id="year" class="pill">年：？？？</span>
+          <span id="place" class="pill">場所：？？？</span>
+        </div>
+        <div id="q" class="question"></div>
+        <div id="choices" class="choices"></div>
+        <div id="learn" class="learn"></div>
+        <div class="controls">
+          <button class="btn blue" onclick="toggleHint()">ヒント</button>
+          <button id="nextBtn" class="btn red" onclick="nextQ()" disabled>次へ</button>
+        </div>
+      </section>
+
+      <section class="box">
+        <h2>時系列バー</h2>
+        <div id="timeline" class="timeline"></div>
+      </section>
+
+      <section class="box mapBox">
+        <h2>出来事が起こった場所</h2>
+        <svg viewBox="0 0 500 320" preserveAspectRatio="xMidYMid meet">
+          <rect width="500" height="320" fill="#f6f6f6"/>
+          <path d="M115 40 L220 25 L330 45 L405 105 L420 180 L350 260 L250 290 L150 260 L95 180 L90 100 Z" fill="#ececec" stroke="#bbb" stroke-width="3"/>
+          <circle id="浦賀" class="point" cx="340" cy="205" r="10"/><text x="354" y="209" class="label">浦賀</text>
+          <circle id="下田" class="point" cx="300" cy="240" r="10"/><text x="314" y="244" class="label">下田</text>
+          <circle id="箱館" class="point" cx="380" cy="60" r="10"/><text x="394" y="64" class="label">箱館</text>
+          <circle id="横浜" class="point" cx="320" cy="185" r="10"/><text x="334" y="189" class="label">横浜</text>
+          <circle id="江戸" class="point" cx="310" cy="170" r="10"/><text x="324" y="174" class="label">江戸</text>
+          <circle id="長崎" class="point" cx="115" cy="220" r="10"/><text x="45" y="224" class="label">長崎</text>
+          <circle id="生麦" class="point" cx="330" cy="190" r="10"/><text x="344" y="194" class="label">生麦</text>
+          <circle id="神奈川" class="point" cx="326" cy="188" r="10"/>
+          <circle id="京都" class="point" cx="245" cy="190" r="10"/><text x="258" y="194" class="label">京都</text>
+        </svg>
+      </section>
+
+      <section class="box">
+        <div class="rabbitRow">
+          <img id="rabbit" src="images/rabbit07.png" class="rabbit" alt="うさぎ">
+          <div id="speech" class="speech">時系列の？？？を開いていこう！</div>
+        </div>
+      </section>
+
+      <section class="box">
+        <h2>振り返り</h2>
+        <div id="recap" class="recapGrid"></div>
+      </section>
+    </div>
+  </div>
+</div>
+
 <script>
-const DATA=[
-{type:'比較',q:'日米和親条約と日米修好通商条約の違いとして正しいものは？',a:'和親条約は補給中心、修好通商条約は貿易開始',o:['和親条約は補給中心、修好通商条約は貿易開始','和親条約は倒幕、修好通商条約は公武合体','和親条約は薩摩、修好通商条約は長州','和親条約は内戦、修好通商条約は米騒動'],support:'<div class="compare"><div class="compareBox"><b>日米和親条約</b>下田・箱館を開く。燃料・食料などの補給が中心。</div><div class="compareBox"><b>日米修好通商条約</b>本格的な貿易開始。不平等条約として重要。</div></div>',explain:'和親条約は「まず港を開いて補給」。修好通商条約は「貿易を始める」。ここを混同しないことが大切。',g:[25,20,10],rabbit:'rabbit10.png'},
-{type:'因果',q:'日米修好通商条約の無勅許調印が、国内の反発を強めた理由は？',a:'朝廷の許可なしに幕府が条約を結んだから',o:['朝廷の許可なしに幕府が条約を結んだから','薩摩藩が幕府を助けたから','長州藩が開国を進めたから','ペリーが将軍になったから'],support:'<b>流れ</b><br>ハリスの圧力 → 勅許を得られない → 井伊直弼が調印 → 反対派が反発',explain:'幕府は朝廷の許可を得ないまま条約を結んだ。そのため、幕府への不信と尊王攘夷運動が強まった。',g:[55,45,15],rabbit:'rabbit11.png'},
-{type:'原因→結果',q:'安政の大獄から桜田門外の変へつながった理由として正しいものは？',a:'井伊直弼が反対派を弾圧し、反発を招いたから',o:['井伊直弼が反対派を弾圧し、反発を招いたから','ペリーが水戸藩を攻撃したから','ハリスが将軍になったから','横浜の貿易が完全に止まったから'],support:'<b>因果</b><br>無勅許調印 → 反対派の批判 → 安政の大獄 → 水戸浪士らの反発 → 桜田門外の変',explain:'桜田門外の変は、単独で覚えるより「安政の大獄への反発」として覚えると流れが見える。',g:[70,70,20],rabbit:'rabbit09.png'},
-{type:'比較',q:'一橋派と南紀派の違いとして正しいものは？',a:'一橋派は徳川慶喜、南紀派は徳川家茂を推した',o:['一橋派は徳川慶喜、南紀派は徳川家茂を推した','一橋派はペリー、南紀派はハリスを推した','一橋派は和親条約、南紀派は薩英戦争を推した','一橋派は長州、南紀派はイギリスを推した'],support:'<div class="compare"><div class="compareBox"><b>一橋派</b>徳川慶喜を推す。改革を期待。</div><div class="compareBox"><b>南紀派</b>徳川家茂を推す。井伊直弼が支持。</div></div>',explain:'将軍継嗣問題は、幕府内部の主導権争いでもあった。慶喜＝一橋派、家茂＝南紀派。',g:[60,45,25],rabbit:'rabbit13.png'},
-{type:'変化理解',q:'薩摩藩が薩英戦争後に考え方を変えた理由として最も適切なものは？',a:'イギリスの軍事力の強さを実感したから',o:['イギリスの軍事力の強さを実感したから','幕府が薩摩を完全に守ったから','ペリーが薩摩藩主になったから','朝廷が貿易を禁止したから'],support:'<b>変化</b><br>攘夷を実行 → 薩英戦争 → 西洋軍事力を実感 → 現実路線へ',explain:'薩摩は「外国を追い払う」だけでは勝てないと知った。ここから西洋技術を学び、倒幕へ向かう力に変わっていく。',g:[55,60,65],rabbit:'rabbit15.png'},
-{type:'変化理解',q:'長州藩が下関戦争後に方針転換していく理由として最も適切なものは？',a:'外国艦隊の力を知り、攘夷だけでは限界があると感じたから',o:['外国艦隊の力を知り、攘夷だけでは限界があると感じたから','幕府から完全に独立を認められたから','アメリカが長州藩を守ったから','貿易がすべて禁止されたから'],support:'<b>変化</b><br>外国船砲撃 → 下関戦争 → 敗北・衝撃 → 軍事改革と倒幕へ',explain:'長州も実戦を通して西洋の強さを知った。薩摩と同じく、攘夷から現実路線へ変化していく。',g:[60,65,70],rabbit:'rabbit12.png'},
-{type:'因果',q:'薩長同盟が倒幕へ大きな意味を持った理由は？',a:'有力な薩摩藩と長州藩が協力するようになったから',o:['有力な薩摩藩と長州藩が協力するようになったから','幕府と朝廷が完全に統一されたから','ペリーとハリスが同盟したから','横浜の貿易が止まったから'],support:'<b>因果</b><br>薩摩と長州は対立 → 西洋の強さを知る → 倒幕の方向へ → 薩長同盟',explain:'薩摩と長州という有力藩が協力したことで、倒幕の力が一気に強まった。',g:[75,60,90],rabbit:'rabbit16.png'},
-{type:'総合理解',q:'幕末の流れを最もよく表しているものは？',a:'外圧→開国→不平等条約→国内反発→攘夷→方針転換→倒幕',o:['外圧→開国→不平等条約→国内反発→攘夷→方針転換→倒幕','開国→鎖国→参勤交代→米騒動→倒幕','攘夷→平安遷都→鎌倉幕府→明治維新','貿易開始→鎖国強化→幕府安定→江戸幕府成立'],support:'<b>全体像</b><br>黒船の外圧が出発点。幕府の対応への不満が高まり、尊王攘夷から倒幕へ変化していく。',explain:'点で覚えた出来事を線にすると、幕末は「外圧によって幕府の権威が揺らぎ、諸藩が変化して倒幕へ向かう流れ」として見える。',g:[90,75,95],rabbit:'rabbit01.png'}
-];
-let idx=0,score=0,locked=false;
+const DATA=[{"year": "1842", "place": "江戸・日本沿岸", "flow": "開国前夜", "q": "幕府が異国船打払令を緩和して出した法令は？", "a": "天保の薪水給与令", "o": ["天保の薪水給与令", "五品江戸廻送令", "貿易章程", "異国船打払令"], "memo": "アヘン戦争で清が敗れ、幕府は強硬な打払い一辺倒では危険だと考えた。", "hint": "打ち払う→水や燃料を与える、に変化。", "rabbit": "外国船を追い払うだけでは危ない…！"}, {"year": "1842", "place": "中国", "flow": "開国前夜", "q": "天保の薪水給与令の発令の要因となった中国での戦争は？", "a": "アヘン戦争", "o": ["アヘン戦争", "第2次アヘン戦争", "薩英戦争", "下関戦争"], "memo": "清がイギリスに敗れたことで、西洋軍事力への危機感が高まった。", "hint": "清とイギリスの戦争。", "rabbit": "清が負けた…日本も危ない！"}, {"year": "1842", "place": "南京", "flow": "開国前夜", "q": "アヘン戦争で敗れた清とイギリスが結んだ条約は？", "a": "南京条約", "o": ["南京条約", "天津条約", "日米和親条約", "日米修好通商条約"], "memo": "アヘン戦争後に結ばれた条約。日本の対外政策にも影響を与えた。", "hint": "アヘン戦争後の条約。", "rabbit": "南京条約、ここが外圧の警鐘！"}, {"year": "1844", "place": "オランダ", "flow": "開国前夜", "q": "1844年、日本に開国を勧めた国は？", "a": "オランダ", "o": ["オランダ", "ロシア", "イギリス", "アメリカ"], "memo": "オランダ国王は12代将軍徳川家慶に親書を送り、開国を勧めた。", "hint": "鎖国下でも関係が続いていた国。", "rabbit": "オランダからも『開いた方がいい』の声。"}, {"year": "1845", "place": "江戸", "flow": "開国前夜", "q": "1845年に対外政策を検討するために設置された役職は？", "a": "海防掛", "o": ["海防掛", "大老", "総領事", "京都守護職"], "memo": "外国船への対応を検討するため、海防掛が設置された。", "hint": "海の防衛を考える役。", "rabbit": "海を守るには作戦会議だ！"}, {"year": "1846", "place": "浦賀", "flow": "開国前夜", "q": "1846年に浦賀へ来航したアメリカ東インド艦隊司令長官は？", "a": "ビッドル", "o": ["ビッドル", "ペリー", "ハリス", "プチャーチン"], "memo": "ビッドルはペリーより前に来航したが、開国には至らなかった。", "hint": "ペリーの前に浦賀へ来た人物。", "rabbit": "ペリーの前にも来ていた！"}, {"year": "1853", "place": "浦賀", "flow": "ペリー来航", "q": "日本を開国させたアメリカ東インド艦隊司令長官は？", "a": "ペリー", "o": ["ペリー", "ハリス", "ビッドル", "ヒュースケン"], "memo": "1853年、ペリーが浦賀へ来航し、国書を幕府に受理させた。", "hint": "黒船で来航。", "rabbit": "黒船ドーン！ここから大きく動く！"}, {"year": "1853", "place": "浦賀", "flow": "ペリー来航", "q": "ペリーが軍艦4隻を率いて日本に来航したのは西暦何年？", "a": "1853年", "o": ["1853年", "1854年", "1858年", "1860年"], "memo": "ペリー来航は1853年。翌1854年に日米和親条約が結ばれる。", "hint": "いやこみ、黒船で困る。", "rabbit": "1853、いやこみ！"}, {"year": "1853", "place": "浦賀", "flow": "ペリー来航", "q": "ペリーは1853年6月に日本のどこへ来航した？", "a": "浦賀", "o": ["浦賀", "下田", "長崎", "横浜"], "memo": "ペリーは浦賀へ来航。江戸に近く、幕府に大きな衝撃を与えた。", "hint": "江戸湾の入口付近。", "rabbit": "浦賀に黒船、江戸がざわつく！"}, {"year": "1853", "place": "アメリカ", "flow": "ペリー来航", "q": "ペリーが幕府に受理させた国書を出したアメリカ大統領は？", "a": "フィルモア", "o": ["フィルモア", "リンカン", "ワシントン", "セオドア・ルーズベルト"], "memo": "ペリーはフィルモア大統領の国書を持参した。", "hint": "ペリーの国書を出した大統領。", "rabbit": "手紙の差出人も大事！"}, {"year": "1853", "place": "江戸", "flow": "ペリー来航", "q": "ペリー来航時の幕府の老中首座は誰？", "a": "阿部正弘", "o": ["阿部正弘", "井伊直弼", "堀田正睦", "徳川斉昭"], "memo": "阿部正弘は諸大名や朝廷に意見を求め、幕政のあり方が揺れ始めた。", "hint": "ペリー対応で諸大名に意見を求めた老中。", "rabbit": "一人で決められない…相談だ！"}, {"year": "1853", "place": "長崎", "flow": "和親条約", "q": "ペリーに続いて来日したロシアの使節は？", "a": "プチャーチン", "o": ["プチャーチン", "ハリス", "ビッドル", "ヒュースケン"], "memo": "プチャーチンはロシア使節として長崎に来航した。", "hint": "ロシアの使節。", "rabbit": "アメリカだけじゃない、ロシアも来た！"}, {"year": "1853", "place": "長崎", "flow": "和親条約", "q": "1853年にプチャーチンはどこに来航した？", "a": "長崎", "o": ["長崎", "浦賀", "下田", "横浜"], "memo": "プチャーチンは長崎に来航。ロシアも日本に開国を求めた。", "hint": "江戸ではなく九州の港。", "rabbit": "長崎にも外圧が来る！"}, {"year": "1854", "place": "神奈川", "flow": "和親条約", "q": "1854年にペリーが再来日し、江戸幕府と締結した条約は？", "a": "日米和親条約（神奈川条約）", "o": ["日米和親条約（神奈川条約）", "日米修好通商条約", "安政の五カ国条約", "日露和親条約"], "memo": "日米和親条約は1854年。下田・箱館を開き、燃料・食料などを供給した。", "hint": "まずは『和親』。", "rabbit": "まずは港を開くところから。"}, {"year": "1854", "place": "神奈川", "flow": "和親条約", "q": "日米和親条約が締結されたのは西暦何年？", "a": "1854年", "o": ["1854年", "1853年", "1858年", "1860年"], "memo": "1853年ペリー来航、1854年日米和親条約。年号の順番に注意。", "hint": "ペリー来航の翌年。", "rabbit": "1853→1854、ここはセット！"}, {"year": "1854", "place": "下田・箱館", "flow": "和親条約", "q": "日米和親条約で開かれた港を2つあげよ。", "a": "下田・箱館", "o": ["下田・箱館", "神奈川・長崎", "横浜・長崎", "新潟・兵庫"], "memo": "日米和親条約で開港したのは下田・箱館。修好通商条約の港と混同注意。", "hint": "和親条約は下田と北の港。", "rabbit": "下田・箱館、まずこの2港！"}, {"year": "1854", "place": "開港地", "flow": "和親条約", "q": "日米和親条約にもとづき、開港地でアメリカ船に供給されたものは？", "a": "燃料・食料", "o": ["燃料・食料", "生糸・茶", "金銀・銅", "毛織物・綿織物"], "memo": "和親条約は貿易開始ではなく、船への補給が中心だった。", "hint": "船旅に必要なもの。", "rabbit": "船には燃料と食料がいる！"}, {"year": "1854", "place": "日米間", "flow": "和親条約", "q": "日米和親条約で、日本が第三国に恩恵的な条件を与えた場合、アメリカにも同様に認める待遇は？", "a": "片務的最恵国待遇", "o": ["片務的最恵国待遇", "領事裁判権", "関税自主権の欠如", "居留地"], "memo": "片務的最恵国待遇は日本に不利な条件の一つ。", "hint": "一方的に、よい条件をアメリカにも。", "rabbit": "いい条件はこっちにも…一方的！"}, {"year": "1854", "place": "日露間", "flow": "和親条約", "q": "日米和親条約締結後、プチャーチンと幕府の間で結ばれた条約は？", "a": "日露和親条約", "o": ["日露和親条約", "日米修好通商条約", "天津条約", "安政の五カ国条約"], "memo": "ロシアとは日露和親条約を結んだ。日米和親条約と同じ1854年。", "hint": "ロシアとの和親条約。", "rabbit": "ロシアとも和親！"}, {"year": "1854", "place": "日露間", "flow": "和親条約", "q": "日露和親条約は西暦何年に締結された？", "a": "1854年", "o": ["1854年", "1853年", "1858年", "1860年"], "memo": "日米和親条約と日露和親条約は、ともに1854年。", "hint": "日米和親条約と同じ年。", "rabbit": "1854年は和親条約の年！"}, {"year": "1854", "place": "長崎", "flow": "和親条約", "q": "日露和親条約で開かれた下田・箱館以外の港は？", "a": "長崎", "o": ["長崎", "横浜", "新潟", "兵庫"], "memo": "日露和親条約では、下田・箱館のほか長崎が開かれた。", "hint": "ロシア使節プチャーチンが来た港。", "rabbit": "長崎も忘れずに！"}, {"year": "1854", "place": "択捉島", "flow": "和親条約", "q": "日露和親条約で、現在の北方領土でもある日本領のうち、最も北の島は？", "a": "択捉島", "o": ["択捉島", "樺太（サハリン）", "淡路島", "対馬"], "memo": "日露和親条約では択捉島以南を日本領とした。", "hint": "北方領土の中で最も北。", "rabbit": "北の境界、択捉島！"}, {"year": "1854", "place": "樺太", "flow": "和親条約", "q": "日露和親条約で、従来通り境界を定めないとされたのはどこ？", "a": "樺太（サハリン）", "o": ["樺太（サハリン）", "択捉島", "箱館", "下田"], "memo": "樺太は境界を定めず、従来通りとされた。", "hint": "サハリンとも呼ばれる。", "rabbit": "線を引かない樺太！"}, {"year": "1853-1854", "place": "江戸湾", "flow": "幕府の対応", "q": "ペリー来航を機に、幕府が江戸湾防衛のために築いた砲台を何という？", "a": "台場", "o": ["台場", "居留地", "海防掛", "奉行所"], "memo": "台場は江戸湾を防衛するための砲台。現在のお台場の由来。", "hint": "大砲を置く場所。", "rabbit": "江戸湾に守りを固める！"}, {"year": "1853-1854", "place": "江戸", "flow": "幕府の対応", "q": "ペリー来航後、老中阿部正弘を中心に行われた台場建設や大船建造の禁の解除などの改革は？", "a": "安政の改革", "o": ["安政の改革", "寛政の改革", "天保の改革", "享保の改革"], "memo": "安政の改革では海防強化や人材登用が進められた。", "hint": "ペリー来航後の改革。", "rabbit": "幕府も立て直しに動く！"}, {"year": "1853-1854", "place": "江戸", "flow": "幕府の対応", "q": "安政の改革で幕政に参画した前水戸藩主は誰？", "a": "徳川斉昭", "o": ["徳川斉昭", "徳川家定", "徳川慶喜", "井伊直弼"], "memo": "徳川斉昭は前水戸藩主。幕政に参画した。", "hint": "水戸藩の人物。", "rabbit": "水戸からも幕政へ！"}, {"year": "1856", "place": "中国・天津", "flow": "通商条約への圧力", "q": "1856年にイギリス船が広東港で清の官憲に臨検されたことを口実に、翌年イギリス・フランス軍が天津に侵入した事件は？", "a": "第2次アヘン戦争（アロー戦争）", "o": ["第2次アヘン戦争（アロー戦争）", "アヘン戦争", "薩英戦争", "下関戦争"], "memo": "第2次アヘン戦争で清が劣勢となり、日本への通商圧力も高まった。", "hint": "アロー戦争ともいう。", "rabbit": "中国情勢が日本にも影響！"}, {"year": "1858", "place": "天津", "flow": "通商条約への圧力", "q": "第2次アヘン戦争で劣勢になった清が、英・仏・露・米と結んだ条約は？", "a": "天津条約", "o": ["天津条約", "南京条約", "日米和親条約", "日米修好通商条約"], "memo": "天津条約は第2次アヘン戦争の流れで結ばれた条約。", "hint": "第2次アヘン戦争後。", "rabbit": "天津条約、ハリスの圧力材料に！"}, {"year": "1856", "place": "下田", "flow": "通商条約への圧力", "q": "日米和親条約の規定により、アメリカから日本に着任した人物は？", "a": "ハリス", "o": ["ハリス", "ペリー", "ヒュースケン", "プチャーチン"], "memo": "ハリスはアメリカ総領事として下田に着任した。", "hint": "初代アメリカ総領事。", "rabbit": "次はハリスが登場！"}, {"year": "1856", "place": "下田", "flow": "通商条約への圧力", "q": "江戸時代末期に来日したハリスの役職は？", "a": "総領事", "o": ["総領事", "大老", "老中", "将軍"], "memo": "ハリスはアメリカ総領事。幕府に通商条約を迫った。", "hint": "外交交渉の代表。", "rabbit": "総領事として交渉！"}, {"year": "1856", "place": "下田", "flow": "通商条約への圧力", "q": "ハリスは西暦何年に来日した？", "a": "1856年", "o": ["1856年", "1853年", "1854年", "1858年"], "memo": "ハリスの来日は1856年。ペリー来航・和親条約の後に続く。", "hint": "ペリー来航の3年後。", "rabbit": "1856、ハリス来日！"}, {"year": "1856", "place": "下田", "flow": "通商条約への圧力", "q": "ハリスが最初に着任したのはどこ？", "a": "下田", "o": ["下田", "浦賀", "横浜", "長崎"], "memo": "ハリスは下田に着任した。", "hint": "日米和親条約で開かれた港。", "rabbit": "下田から交渉開始！"}, {"year": "1856-1858", "place": "江戸", "flow": "通商条約への圧力", "q": "ハリス着任時、老中首座として外交事務にあたっていた人物は誰？", "a": "堀田正睦", "o": ["堀田正睦", "阿部正弘", "井伊直弼", "徳川斉昭"], "memo": "堀田正睦は老中首座として日米修好通商条約の勅許を求めた。", "hint": "勅許を求めた老中。", "rabbit": "通商条約をめぐって朝廷へ！"}, {"year": "1858", "place": "日米間", "flow": "通商条約", "q": "第2次アヘン戦争で天津条約が結ばれたことを利用して、ハリスが幕府に迫った条約は？", "a": "日米修好通商条約", "o": ["日米修好通商条約", "日米和親条約", "日露和親条約", "南京条約"], "memo": "ハリスは清の状況を材料にして、幕府に通商条約を迫った。", "hint": "本格的な貿易開始の条約。", "rabbit": "ついに通商条約へ！"}, {"year": "1858", "place": "日米間", "flow": "通商条約", "q": "日米修好通商条約は西暦何年に締結された？", "a": "1858年", "o": ["1858年", "1854年", "1856年", "1860年"], "memo": "日米修好通商条約は1858年。無勅許で調印された。", "hint": "ハリス来日後。", "rabbit": "1858、通商条約！"}, {"year": "1858", "place": "江戸", "flow": "通商条約", "q": "日米修好通商条約を勅許なしで調印した大老は誰？", "a": "井伊直弼", "o": ["井伊直弼", "堀田正睦", "阿部正弘", "徳川斉昭"], "memo": "井伊直弼は勅許を得ないまま日米修好通商条約を調印した。", "hint": "安政の大獄でも重要。", "rabbit": "井伊直弼が強行！"}, {"year": "1858", "place": "京都", "flow": "通商条約", "q": "日米修好通商条約の調印に際して勅許を与えなかった天皇は？", "a": "孝明天皇", "o": ["孝明天皇", "明治天皇", "後水尾天皇", "光明天皇"], "memo": "孝明天皇は通商条約の勅許を与えなかった。", "hint": "幕末の天皇。", "rabbit": "朝廷の意向も大きな力に！"}, {"year": "1858", "place": "神奈川・長崎", "flow": "通商条約", "q": "日米修好通商条約で、幕府は和親条約の開港地のほかに4港を開くことと江戸・大阪の開市を約束したが、翌1859年に開港することを約束した土地を2つあげよ。", "a": "神奈川・長崎", "o": ["神奈川・長崎", "下田・箱館", "新潟・兵庫", "浦賀・長崎"], "memo": "1859年開港予定は神奈川・長崎。神奈川は実際には横浜が開港した。", "hint": "翌1859年に開く約束。", "rabbit": "神奈川・長崎から貿易へ！"}, {"year": "1859", "place": "横浜", "flow": "通商条約", "q": "日米修好通商条約の開港地のうち、神奈川は東海道の宿場町で混乱を避けるため近接した漁村が開港された。それはどこ？", "a": "横浜", "o": ["横浜", "下田", "箱館", "長崎"], "memo": "神奈川ではなく横浜が開港され、のちに貿易の中心地になった。", "hint": "幕末貿易の中心地。", "rabbit": "横浜が大きくなる！"}, {"year": "1859", "place": "下田", "flow": "通商条約", "q": "横浜が開港されたため、半年後に閉鎖された港はどこ？", "a": "下田", "o": ["下田", "長崎", "箱館", "新潟"], "memo": "横浜開港後、下田は閉鎖された。和親条約の港との変化に注意。", "hint": "ハリスが最初に着任した港。", "rabbit": "下田は役目を終える。"}, {"year": "1860・1863", "place": "新潟・兵庫", "flow": "通商条約", "q": "日米修好通商条約で、1860年と1863年に開港を約した港は？", "a": "新潟・兵庫", "o": ["新潟・兵庫", "下田・箱館", "神奈川・長崎", "横浜・長崎"], "memo": "追加で開港を約束したのは新潟・兵庫。", "hint": "後から開く約束の港。", "rabbit": "あとから新潟・兵庫！"}, {"year": "1858", "place": "五カ国", "flow": "通商条約", "q": "日米修好通商条約はアメリカ以外にもオランダ・ロシア・イギリス・フランスとも締結されたが、これらを総称して何という？", "a": "安政の五カ国条約", "o": ["安政の五カ国条約", "日米和親条約", "天津条約", "南京条約"], "memo": "安政の五カ国条約は、日米修好通商条約と同様の条約を五カ国と結んだもの。", "hint": "安政期に五カ国と。", "rabbit": "五カ国と条約ラッシュ！"}, {"year": "1858", "place": "条約内容", "flow": "通商条約", "q": "安政の五カ国条約が不平等条約とされる理由を2つあげよ。", "a": "領事裁判権を認めたこと・関税自主権の欠如", "o": ["領事裁判権を認めたこと・関税自主権の欠如", "参勤交代の強化・開港地の閉鎖", "勅許の獲得・関税の自由化", "鎖国の継続・大船建造の禁止"], "memo": "不平等条約のポイントは領事裁判権と関税自主権の欠如。", "hint": "外国人裁判と関税。", "rabbit": "不平等ポイントは2つ！"}, {"year": "1858", "place": "条約内容", "flow": "通商条約", "q": "安政の五カ国条約の関税について定めた規定を何という？", "a": "貿易章程", "o": ["貿易章程", "五品江戸廻送令", "万延小判", "片務的最恵国待遇"], "memo": "関税について定めた規定は貿易章程。", "hint": "貿易の規則。", "rabbit": "貿易のルールも決まる。"}, {"year": "1859", "place": "開港地", "flow": "貿易開始", "q": "安政の五カ国条約により、開港地に外国人が居住し貿易を許された地域を何という？", "a": "居留地", "o": ["居留地", "台場", "海防掛", "宿場"], "memo": "居留地は外国人が住み、貿易を行う区域。", "hint": "外国人が居留する地域。", "rabbit": "開港地に外国人の町ができる！"}, {"year": "1859", "place": "横浜", "flow": "貿易開始", "q": "幕末、修好通商条約の締結による貿易は西暦何年から開始された？", "a": "1859年", "o": ["1859年", "1858年", "1854年", "1860年"], "memo": "条約締結は1858年、貿易開始は1859年。", "hint": "条約の翌年。", "rabbit": "1858調印、1859貿易開始！"}, {"year": "1859", "place": "横浜", "flow": "貿易開始", "q": "幕末に貿易の中心地になった開港地はどこ？", "a": "横浜", "o": ["横浜", "下田", "箱館", "浦賀"], "memo": "横浜は幕末貿易の中心地となった。", "hint": "神奈川の近くに開港。", "rabbit": "横浜が貿易の主役！"}, {"year": "1859", "place": "イギリス", "flow": "貿易開始", "q": "幕末の貿易における取引相手国で中心になったのはどこ？", "a": "イギリス", "o": ["イギリス", "ロシア", "オランダ", "清"], "memo": "幕末貿易の中心相手はイギリス。", "hint": "産業革命の中心国。", "rabbit": "イギリスとの取引が大きい！"}, {"year": "1859", "place": "貿易品", "flow": "貿易開始", "q": "幕末の貿易における輸出品の上位2品目は？", "a": "生糸・茶", "o": ["生糸・茶", "毛織物・綿織物", "金銀・銅", "雑穀・蠟"], "memo": "輸出品は生糸・茶。日本から海外へ出ていくもの。", "hint": "日本から出ていく。", "rabbit": "輸出は生糸と茶！"}, {"year": "1859", "place": "貿易品", "flow": "貿易開始", "q": "幕末の貿易における輸入品の上位2品目は？", "a": "毛織物・綿織物", "o": ["毛織物・綿織物", "生糸・茶", "金銀・銅", "米・雑穀"], "memo": "輸入品は毛織物・綿織物。外国から入ってくるもの。", "hint": "外国の布製品。", "rabbit": "輸入は毛織物・綿織物！"}, {"year": "1859", "place": "金融", "flow": "貿易開始", "q": "幕末の貿易開始にともない、多量の金貨が海外に流出した原因は？", "a": "金銀比価の相違", "o": ["金銀比価の相違", "関税自主権の回復", "参勤交代の強化", "海防掛の設置"], "memo": "日本と海外で金銀の交換比率が違ったため、日本の金貨が海外に流出した。", "hint": "金と銀の交換比率。", "rabbit": "金がどんどん出ていく！"}, {"year": "1860", "place": "金融", "flow": "貿易開始", "q": "金貨の海外大量流出への対策として、幕府が重量を大幅に減らした小判を鋳造したが、これを何という？", "a": "万延小判", "o": ["万延小判", "慶長小判", "天保小判", "元禄小判"], "memo": "万延小判は金貨流出への対策として鋳造された。", "hint": "1860年、万延元年。", "rabbit": "小判を軽くして対策！"}, {"year": "1860", "place": "江戸", "flow": "貿易開始", "q": "貿易開始による市場の混乱に対し、幕府が江戸問屋の保護と流通経済の統制のために出した命令は？", "a": "五品江戸廻送令", "o": ["五品江戸廻送令", "貿易章程", "天保の薪水給与令", "異国船打払令"], "memo": "五品江戸廻送令は江戸問屋を守るため、商品を江戸経由にしようとした命令。", "hint": "五品を江戸へ廻送。", "rabbit": "商品を江戸経由に戻したい！"}, {"year": "1860", "place": "江戸", "flow": "貿易開始", "q": "五品江戸廻送令は西暦何年に出された？", "a": "1860年", "o": ["1860年", "1859年", "1858年", "1862年"], "memo": "五品江戸廻送令は1860年。貿易開始後の混乱への対策。", "hint": "万延小判と同じころ。", "rabbit": "1860、流通対策！"}, {"year": "1860", "place": "江戸", "flow": "貿易開始", "q": "五品江戸廻送令で、雑穀・蠟・呉服以外の2つは？", "a": "生糸・水油", "o": ["生糸・水油", "米・茶", "毛織物・綿織物", "金銀・銅"], "memo": "五品は雑穀・水油・蠟・呉服・生糸。", "hint": "輸出で重要な品と油。", "rabbit": "五品をまとめて覚える！"}, {"year": "1860", "place": "江戸赤羽橋", "flow": "尊攘事件", "q": "1860年に、駐日アメリカ総領事ハリスの通訳であったオランダ人が江戸赤羽橋で薩摩藩浪士に殺された。この人物は誰？", "a": "ヒュースケン", "o": ["ヒュースケン", "ハリス", "プチャーチン", "ビッドル"], "memo": "ヒュースケン事件は開国後の尊攘事件の一つ。", "hint": "ハリスの通訳。", "rabbit": "外国人への反発が事件に…！"}, {"year": "1861", "place": "江戸高輪", "flow": "尊攘事件", "q": "水戸藩浪士が1861年に江戸高輪のイギリス仮公使館である寺院を襲撃した事件は？", "a": "東禅寺事件", "o": ["東禅寺事件", "生麦事件", "桜田門外の変", "イギリス公使館焼打ち事件"], "memo": "東禅寺事件はイギリス仮公使館への襲撃事件。", "hint": "寺の名前が事件名。", "rabbit": "高輪の寺院を襲撃！"}, {"year": "1862", "place": "生麦", "flow": "尊攘事件", "q": "1862年、江戸から帰る途中の島津久光の行列を横切ったイギリス人が殺傷された事件は？", "a": "生麦事件", "o": ["生麦事件", "東禅寺事件", "ヒュースケン事件", "下関戦争"], "memo": "生麦事件はのちの薩英戦争につながる重要事件。", "hint": "島津久光の行列。", "rabbit": "行列を横切って大事件！"}, {"year": "1862", "place": "品川御殿山", "flow": "尊攘事件", "q": "1862年、品川御殿山に建築中のイギリス公使館が長州藩の高杉晋作らに襲撃され全焼した事件は？", "a": "イギリス公使館焼打ち事件", "o": ["イギリス公使館焼打ち事件", "東禅寺事件", "生麦事件", "ヒュースケン事件"], "memo": "イギリス公使館焼打ち事件は長州藩士による尊攘事件。", "hint": "御殿山・長州・焼打ち。", "rabbit": "尊攘の熱が燃え上がる！"}, {"year": "1853", "place": "江戸", "flow": "公武合体と尊攘運動", "q": "1853年のペリー来航直後に13代将軍になったのは誰？", "a": "徳川家定", "o": ["徳川家定", "徳川家茂", "徳川慶喜", "徳川斉昭"], "memo": "13代将軍は徳川家定。病弱で嗣子がなかったため、将軍継嗣問題へつながる。", "hint": "13代将軍。", "rabbit": "将軍の後継問題へつながる！"}, {"year": "1857", "place": "江戸", "flow": "公武合体と尊攘運動", "q": "徳川家定は生来病弱で嗣子がなかったため、次期将軍の問題が1857年から公然化したが、これを何という？", "a": "将軍継嗣問題", "o": ["将軍継嗣問題", "公武合体", "尊王攘夷運動", "安政の改革"], "memo": "誰を次の将軍にするかをめぐり、一橋派と南紀派が対立した。", "hint": "次の将軍をめぐる問題。", "rabbit": "次は誰が将軍？で対立！"}, {"year": "1857", "place": "江戸", "flow": "公武合体と尊攘運動", "q": "14代将軍に賢明な人物を迎え、幕政改革を行って難局を乗り切ろうと考えた人たちが推したのは誰？", "a": "徳川（一橋）慶喜", "o": ["徳川（一橋）慶喜", "徳川家茂", "井伊直弼", "徳川家定"], "memo": "一橋派は徳川慶喜を推した。", "hint": "一橋派が推した人物。", "rabbit": "改革派は慶喜を推す！"}, {"year": "1857", "place": "江戸", "flow": "公武合体と尊攘運動", "q": "14代将軍に徳川慶喜を推した人たちは何派と呼ばれた？", "a": "一橋派", "o": ["一橋派", "南紀派", "尊攘派", "佐幕派"], "memo": "一橋派は徳川慶喜を推した。対立する南紀派は徳川家茂を推した。", "hint": "慶喜＝一橋。", "rabbit": "慶喜を推すのは一橋派！"}];
+let order=[...DATA].sort((a,b)=>String(a.year).localeCompare(String(b.year),'ja'));
+let idx=0,score=0,locked=false,opened=[],answered=[];
+const flows=[...new Set(order.map(x=>x.flow))];
+
 function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
-function showQ(){locked=false;const item=DATA[idx];document.getElementById('count').textContent=`${idx+1} / ${DATA.length}`;document.getElementById('score').textContent=`正解 ${score}`;document.getElementById('type').textContent=item.type;document.getElementById('question').textContent=item.q;document.getElementById('support').innerHTML=item.support;document.getElementById('explain').classList.remove('show');document.getElementById('explain').innerHTML=item.explain;document.getElementById('nextBtn').disabled=true;document.getElementById('rabbit').src='images/'+item.rabbit;document.getElementById('speech').innerHTML='理由を考えよう！';document.getElementById('gBakufu').style.width=item.g[0]+'%';document.getElementById('gJoi').style.width=item.g[1]+'%';document.getElementById('gChange').style.width=item.g[2]+'%';const box=document.getElementById('choices');box.innerHTML='';shuffle(item.o).forEach(opt=>{const b=document.createElement('button');b.className='choice';b.textContent=opt;b.onclick=()=>answer(b,opt,item);box.appendChild(b)})}
-function answer(btn,opt,item){if(locked)return;locked=true;document.querySelectorAll('.choice').forEach(b=>{if(b.textContent===item.a)b.classList.add('correct')});if(opt===item.a){score++;document.getElementById('speech').innerHTML='理解できてる！';document.getElementById('rabbit').src='images/rabbit16.png'}else{btn.classList.add('wrong');document.getElementById('speech').innerHTML='ここが理解ポイント！';document.getElementById('rabbit').src='images/rabbit09.png'}document.getElementById('score').textContent=`正解 ${score}`;document.getElementById('explain').classList.add('show');document.getElementById('nextBtn').disabled=false}
-function nextQ(){idx++;if(idx>=DATA.length){finish();return}showQ()}
-function toggleExplain(){document.getElementById('explain').classList.toggle('show')}
-function finish(){document.getElementById('stage').style.display='none';document.getElementById('result').style.display='block';document.getElementById('finalScore').textContent=`${score}/${DATA.length}`}
+
+function renderTimeline(active){
+  const t=document.getElementById('timeline');
+  t.innerHTML='';
+  flows.forEach(f=>{
+    const d=document.createElement('div');
+    const known=opened.includes(f);
+    d.className='node '+(f===active?'active':known?'open':'');
+    d.innerHTML=known||f===active?f:'？？？';
+    t.appendChild(d);
+  });
+}
+
+function light(place){
+  document.querySelectorAll('.point').forEach(p=>p.classList.remove('on'));
+  ['浦賀','下田','箱館','横浜','江戸','長崎','生麦','神奈川','京都'].forEach(id=>{
+    if(place.includes(id)){
+      const el=document.getElementById(id);
+      if(el)el.classList.add('on');
+    }
+  });
+}
+
+function renderRecap(){
+  const r=document.getElementById('recap');
+  r.innerHTML='';
+  answered.slice(-6).forEach(it=>{
+    const div=document.createElement('div');
+    div.className='recap';
+    div.innerHTML='<b>'+it.year+'｜'+it.a+'</b><br>'+it.memo;
+    r.appendChild(div);
+  });
+}
+
+function showQ(){
+  locked=false;
+  const it=order[idx];
+  if(!opened.includes(it.flow)) opened.push(it.flow);
+  document.getElementById('count').textContent=`${idx+1}/${order.length}`;
+  document.getElementById('year').textContent='年：？？？';
+  document.getElementById('place').textContent='場所：？？？';
+  document.getElementById('q').textContent=it.q;
+  document.getElementById('learn').classList.remove('show');
+  document.getElementById('learn').innerHTML='';
+  document.getElementById('nextBtn').disabled=true;
+  renderTimeline(it.flow);
+  light(it.place);
+  renderRecap();
+  const box=document.getElementById('choices');
+  box.innerHTML='';
+  shuffle(it.o).forEach(opt=>{
+    const b=document.createElement('button');
+    b.className='choice';
+    b.textContent=opt;
+    b.onclick=()=>answer(b,opt,it);
+    box.appendChild(b);
+  });
+}
+
+function toggleHint(){
+  const it=order[idx];
+  document.getElementById('year').textContent='年：'+it.year;
+  document.getElementById('place').textContent='場所：'+it.place;
+  document.getElementById('learn').innerHTML='<b>ヒント：</b>'+it.hint;
+  document.getElementById('learn').classList.add('show');
+}
+
+function answer(btn,opt,it){
+  if(locked)return;
+  locked=true;
+  document.querySelectorAll('.choice').forEach(b=>{if(b.textContent===it.a)b.classList.add('correct')});
+  if(opt===it.a){
+    score++;
+    document.getElementById('rabbit').src='images/rabbit16.png';
+    document.getElementById('speech').textContent='流れに乗ってる！';
+  }else{
+    btn.classList.add('wrong');
+    document.getElementById('rabbit').src='images/rabbit09.png';
+    document.getElementById('speech').textContent='ここで確認！';
+  }
+  document.getElementById('year').textContent='年：'+it.year;
+  document.getElementById('place').textContent='場所：'+it.place;
+  document.getElementById('learn').innerHTML=`<b>正解：</b>${it.a}<br><b>流れメモ：</b>${it.memo}<br><b>うさぎ劇場：</b>${it.rabbit}`;
+  document.getElementById('learn').classList.add('show');
+  if(!answered.includes(it)) answered.push(it);
+  renderRecap();
+  document.getElementById('nextBtn').disabled=false;
+}
+
+function nextQ(){
+  idx++;
+  if(idx>=order.length) finish();
+  else showQ();
+}
+
+function finish(){
+  document.querySelector('.mainStack').innerHTML=
+  `<section class="box" style="text-align:center">
+    <img src="images/rabbit01.png" class="rabbit" style="width:180px">
+    <h1>トレーニング完了！</h1>
+    <div style="font-size:46px;font-weight:900;color:#b71c1c">${score}/${order.length}</div>
+    <p style="font-weight:800;line-height:1.7">時系列と場所の枠組みができました。次はアドバンスで理由を確認しよう。</p>
+    <button class="btn red" onclick="location.href='index3.html'">アドバンスへ</button>
+    <button class="btn blue" onclick="location.href='index.html'">メニューへ</button>
+  </section>`;
+}
+
 showQ();
 </script>
 </body>
