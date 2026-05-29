@@ -3,25 +3,776 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>日本史うさぎクイズ｜トレーニングモード</title>
+<title>トレーニングモード｜日本史</title>
+
 <style>
-:root{--ink:#172334;--blue:#2f7fda;--pale:#eef7ff;--line:#cfe3f7;--card:#fff;--gold:#f4ce83;--shadow:0 10px 24px rgba(31,58,87,.12)}
-*{box-sizing:border-box}html,body{margin:0;padding:0;overflow-x:hidden;background:linear-gradient(180deg,#f7fbff,#fff8eb);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif}button{font-family:inherit}.app{width:min(1180px,100%);margin:0 auto;padding:14px}.header{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#eaf5ff;border:4px solid var(--line);border-radius:26px;padding:14px 18px;box-shadow:var(--shadow)}.brand{display:flex;align-items:center;gap:12px;min-width:0}.logo{width:58px;height:58px;object-fit:contain;flex:0 0 auto}.title h1{margin:0;font-size:clamp(24px,4vw,42px);line-height:1.05}.title p{margin:4px 0 0;color:#4e6379;font-weight:800;font-size:clamp(14px,2vw,20px)}.nav{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}.nav a{text-decoration:none;background:white;color:#143150;border:4px solid #c7dcf2;border-radius:999px;padding:12px 18px;font-weight:900;font-size:clamp(14px,2vw,18px);box-shadow:0 6px 0 #a9bed4;white-space:nowrap}.main{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(340px,.92fr);gap:16px;margin-top:16px;align-items:start}.panel{background:rgba(255,255,255,.92);border:4px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden}.quiz{padding:18px}.meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}.pill{border:4px solid var(--line);background:#f3f9ff;border-radius:999px;padding:8px 16px;font-weight:900;font-size:clamp(18px,2.4vw,28px);color:#274b6e}.question{font-size:clamp(23px,3.4vw,38px);line-height:1.32;font-weight:950;margin:10px 0 18px;word-break:break-word;overflow-wrap:anywhere}.choices{display:grid;gap:12px}.choice{width:100%;text-align:left;background:#fff;border:4px solid #dbe8f5;border-radius:20px;padding:17px 20px;font-size:clamp(19px,2.7vw,30px);font-weight:950;color:#0877d9}.choice.correct{background:#e9fff2;border-color:#35a36d;color:#0b7444}.choice.wrong{background:#fff0ef;border-color:#e25750;color:#b01d18}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}.actions button{border:0;border-radius:18px;padding:14px 22px;font-weight:950;font-size:clamp(16px,2.2vw,22px);color:white;background:#214d79;box-shadow:0 6px 0 #9bb5cf}.actions .light{background:white;color:#222;border:4px solid #d7e5f4}.feedback{margin-top:14px;border:4px dashed #f4c57f;border-radius:20px;padding:14px;background:#fffdf8;display:none}.feedback.show{display:block}.feedback h2{margin:0 0 8px;color:#0c8b58;font-size:clamp(20px,2.6vw,30px)}.feedback p{margin:4px 0;font-size:clamp(15px,2vw,19px);line-height:1.55;font-weight:700}.side{display:grid;gap:14px}.block{padding:14px;background:rgba(255,255,255,.94);border:4px solid var(--line);border-radius:22px;box-shadow:var(--shadow)}.block h2{font-size:clamp(20px,2.5vw,30px);margin:0 0 12px;color:#31506d}.timeline{background:#fffaf3;border-color:#f3cf87}.phase{font-weight:950;color:#9b6310;font-size:clamp(19px,2.4vw,28px);margin-bottom:14px}.dots{display:flex;align-items:flex-start;gap:0;width:100%;overflow:hidden}.node{flex:1;min-width:0;text-align:center;position:relative}.node:not(:last-child)::after{content:"";position:absolute;top:22px;left:50%;width:100%;height:8px;background:#cfe3f7;z-index:0}.dot{width:44px;height:44px;border-radius:50%;border:8px solid #cfe3f7;background:white;margin:0 auto 7px;position:relative;z-index:1}.node.done .dot{background:#63a7fa;border-color:#247bd0}.node.done:not(:last-child)::after{background:#63a7fa}.node.current .dot{box-shadow:0 0 0 6px rgba(36,123,208,.18)}.node span{display:block;font-size:clamp(11px,1.7vw,15px);font-weight:950;line-height:1.15;color:#55708b;word-break:keep-all}.mapBox{width:100%;aspect-ratio:1.35/1;min-height:240px}svg{width:100%;height:100%;display:block}.region{fill:white;stroke:#9eb8d2;stroke-width:5;transition:.3s}.region.active{fill:#ff896b}.region.done{fill:#ffd1b5}.placeDot{fill:#fff;stroke:#d63a31;stroke-width:6;opacity:0}.placeDot.show{opacity:1}.placeText{font-size:20px;font-weight:900;fill:#172334}.theater{border-color:#f5cf82;background:#fffdf7}.stage{display:flex;align-items:center;gap:14px}.actor{width:86px;height:86px;object-fit:contain;flex:0 0 auto}.bubble{position:relative;background:#fff6ce;border:4px solid #f1c760;border-radius:18px;padding:12px 14px;font-size:clamp(15px,2vw,20px);font-weight:900;line-height:1.45}.progressList{display:grid;gap:8px}.row{border:3px solid var(--line);border-radius:14px;padding:8px 10px;font-weight:900;color:#58708a;background:white;font-size:clamp(13px,1.8vw,16px)}.row.done{background:#edf6ff;color:#214d79;border-color:#7bb8f0}.row.current{border-color:#2f7fda}.hiddenAns{color:#aab9c8}
-@media (max-width:900px){.app{padding:10px}.header{border-radius:20px;padding:12px;align-items:flex-start;flex-direction:column}.logo{width:46px;height:46px}.nav{width:100%;justify-content:flex-start;margin-top:8px}.nav a{padding:10px 13px;font-size:14px;border-width:3px}.main{display:block}.panel{border-radius:20px;border-width:3px}.quiz{padding:14px}.side{margin-top:12px;display:flex;flex-direction:column}.timeline{order:1}.mapWrap{order:2}.theater{order:3}.historyList{order:4}.question{white-space:normal;max-width:100%}.choice{padding:15px 16px;border-width:3px}.dots{overflow-x:auto;padding-bottom:4px}.node{min-width:92px}.node:not(:last-child)::after{top:18px;height:6px}.dot{width:36px;height:36px;border-width:6px}.mapBox{min-height:220px}}
-@media (max-width:520px){.app{padding:8px}.brand{gap:8px}.title h1{font-size:28px}.title p{font-size:15px}.pill{font-size:18px;padding:7px 11px;border-width:3px}.question{font-size:24px;line-height:1.35}.choice{font-size:21px}.actions button{font-size:17px;padding:12px 16px}.block{padding:11px;border-width:3px}.stage{gap:8px}.actor{width:64px;height:64px}.bubble{font-size:15px;padding:10px}.mapBox{min-height:190px}.placeText{font-size:17px}}
-</style></head><body><div class="app"><header class="header"><div class="brand"><img class="logo" src="images/rabbit14.png" alt="うさぎ"><div class="title"><h1>トレーニングモード</h1><p>時系列と場所で、点を線にする</p></div></div><nav class="nav"><a href="index.html">通常クイズへ</a><a href="index3.html">アドバンストレーニング</a></nav></header><main class="main"><section class="panel quiz"><div class="meta"><div class="pill" id="countPill">1/10</div><div class="pill" id="yearPill">1853</div><div class="pill" id="placePill">場所：浦賀</div></div><div class="question" id="question"></div><div class="choices" id="choices"></div><div class="actions"><button id="nextBtn" style="display:none">次へ</button><button class="light" id="restartBtn">最初から</button><button class="light" onclick="location.href='index.html'">通常クイズへ</button></div><div class="feedback" id="feedback"><h2 id="fbTitle">正解！</h2><p id="fbMemory"></p><p id="fbInfo"></p></div></section><aside class="side"><section class="block timeline"><div class="phase" id="phaseName">開国の衝撃</div><div class="dots" id="timeline"></div></section><section class="block mapWrap"><h2>出来事が起こった場所</h2><div class="mapBox"><svg viewBox="0 0 700 520"><polygon id="hakodate" class="region" points="485,42 625,58 650,126 571,165 484,139 439,86"/><text class="placeText" x="544" y="113">箱館</text><polygon id="tohoku" class="region" points="445,170 556,188 528,315 422,288 398,226"/><polygon id="kanto" class="region" points="354,300 500,318 540,396 454,438 335,404"/><text class="placeText" x="435" y="363">江戸</text><polygon id="tokai" class="region" points="215,322 354,300 335,404 197,406 158,358"/><text class="placeText" x="238" y="373">下田</text><polygon id="kinki" class="region" points="145,286 215,322 158,358 78,340 58,290"/><text class="placeText" x="126" y="315">京都</text><polygon id="chugoku" class="region" points="40,270 145,286 78,340 18,324"/><text class="placeText" x="28" y="285">下関</text><polygon id="kyushu" class="region" points="35,345 98,356 116,460 50,484 11,430"/><text class="placeText" x="28" y="432">鹿児島</text><circle id="placeMark" class="placeDot" cx="460" cy="356" r="15"/></svg></div></section><section class="block theater"><div class="stage"><img id="actor" class="actor" src="images/rabbit01.png" alt="うさぎ劇"><div class="bubble" id="bubble">この出来事は、どこで、何年ごろ起こった？</div></div></section><section class="block historyList"><h2>流れの確認</h2><div class="progressList" id="progressList"></div></section></aside></main></div>
+:root{
+--bg:#f6efe7;
+--card:#fffdf9;
+--line:#e5cfbb;
+--ink:#2d2925;
+--accent:#b71c1c;
+}
+
+*{
+box-sizing:border-box;
+-webkit-tap-highlight-color:transparent;
+}
+
+body{
+margin:0;
+font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;
+background:linear-gradient(135deg,#fff8ef,#efe4d6);
+color:var(--ink);
+overflow-x:hidden;
+}
+
+.app{
+max-width:1100px;
+margin:0 auto;
+padding:12px;
+}
+
+.card{
+background:rgba(255,253,249,.95);
+border:2px solid #e5cfbb;
+border-radius:24px;
+padding:18px;
+box-shadow:0 12px 28px rgba(0,0,0,.08);
+}
+
+.top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+flex-wrap:wrap;
+margin-bottom:12px;
+}
+
+.title{
+font-size:clamp(28px,4vw,44px);
+font-weight:900;
+}
+
+.sub{
+font-size:14px;
+font-weight:700;
+color:#6c5f55;
+}
+
+.menuBtn{
+border:none;
+border-radius:14px;
+padding:12px 16px;
+background:#1d3557;
+color:white;
+font-weight:900;
+cursor:pointer;
+box-shadow:0 5px 0 #0d2035;
+}
+
+.hero{
+display:grid;
+grid-template-columns:1fr 320px;
+gap:14px;
+}
+
+.info{
+background:#fff8ea;
+border:2px solid #ead6c3;
+border-radius:22px;
+padding:18px;
+margin-bottom:14px;
+}
+
+.info h2{
+margin:0 0 10px;
+font-size:clamp(36px,5vw,58px);
+line-height:1.05;
+}
+
+.info p{
+margin:0;
+line-height:1.7;
+font-size:clamp(16px,2vw,22px);
+font-weight:800;
+color:#5b5048;
+}
+
+.timeline{
+background:white;
+border:2px solid #ead6c3;
+border-radius:22px;
+padding:16px;
+margin-bottom:14px;
+}
+
+.timelineTitle{
+font-size:22px;
+font-weight:900;
+margin-bottom:12px;
+}
+
+.flow{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+}
+
+.node{
+padding:10px 12px;
+border-radius:999px;
+background:#eee2d4;
+font-size:14px;
+font-weight:900;
+transition:.25s;
+}
+
+.node.active{
+background:#c62828;
+color:white;
+transform:scale(1.06);
+}
+
+.mapWrap{
+background:white;
+border:2px solid #ead6c3;
+border-radius:22px;
+padding:14px;
+}
+
+.mapTitle{
+font-size:22px;
+font-weight:900;
+margin-bottom:10px;
+}
+
+.map{
+background:#f7f7f7;
+border-radius:18px;
+padding:10px;
+}
+
+.point{
+fill:#cfcfcf;
+transition:.25s;
+}
+
+.point.active{
+fill:#d62828;
+}
+
+.pointLabel{
+font-size:11px;
+font-weight:900;
+fill:#333;
+}
+
+.right{
+background:#fffaf4;
+border:2px dashed #e4cfbc;
+border-radius:22px;
+padding:16px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+}
+
+.rabbit{
+width:min(260px,70vw);
+object-fit:contain;
+filter:drop-shadow(0 10px 10px rgba(0,0,0,.12));
+}
+
+.speech{
+margin-top:12px;
+background:#fff8d8;
+border:3px solid #111;
+border-radius:18px;
+padding:14px;
+font-weight:900;
+line-height:1.5;
+text-align:center;
+box-shadow:4px 4px 0 #111;
+}
+
+.quiz{
+margin-top:16px;
+background:white;
+border:2px solid #ead6c3;
+border-radius:22px;
+padding:18px;
+}
+
+.status{
+display:flex;
+justify-content:space-between;
+gap:10px;
+margin-bottom:12px;
+flex-wrap:wrap;
+}
+
+.badge{
+background:#f0e3d5;
+border-radius:999px;
+padding:8px 12px;
+font-weight:900;
+}
+
+.question{
+font-size:clamp(22px,3vw,34px);
+font-weight:900;
+line-height:1.45;
+margin-bottom:14px;
+}
+
+.choices{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+.choice{
+border:2px solid #d9c7b7;
+background:white;
+border-radius:18px;
+padding:14px;
+font-weight:900;
+font-size:18px;
+text-align:left;
+cursor:pointer;
+color:#1265a8;
+box-shadow:0 4px 0 #d0bba8;
+}
+
+.choice.correct{
+background:#e7fff0;
+border-color:#14824d;
+color:#14824d;
+}
+
+.choice.wrong{
+background:#fff0f0;
+border-color:#c62828;
+color:#c62828;
+}
+
+.learn{
+display:none;
+margin-top:14px;
+background:#fff8ea;
+border:2px solid #efcf9e;
+border-radius:18px;
+padding:14px;
+line-height:1.7;
+}
+
+.learn.show{
+display:block;
+}
+
+.next{
+margin-top:14px;
+display:flex;
+justify-content:space-between;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.next button{
+border:none;
+border-radius:14px;
+padding:12px 16px;
+font-weight:900;
+cursor:pointer;
+}
+
+.red{
+background:#b71c1c;
+color:white;
+box-shadow:0 5px 0 #7f1111;
+}
+
+.blue{
+background:#1d3557;
+color:white;
+box-shadow:0 5px 0 #0d2035;
+}
+
+@media(max-width:850px){
+
+.hero{
+grid-template-columns:1fr;
+}
+
+.choices{
+grid-template-columns:1fr;
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<div class="card">
+
+<div class="top">
+<div>
+<div class="title">トレーニングモード</div>
+<div class="sub">流れ・場所・時系列で理解する</div>
+</div>
+
+<button class="menuBtn"
+onclick="location.href='index.html'">
+メニューへ
+</button>
+</div>
+
+<div class="hero">
+
+<div>
+
+<div class="info">
+<h2>歴史は、<br>流れで覚える。</h2>
+
+<p>
+単語だけを暗記するのではなく、<br>
+「何が起こり、何が変わったか」をつなげよう。
+</p>
+</div>
+
+<div class="timeline">
+<div class="timelineTitle">時系列</div>
+
+<div id="flow" class="flow"></div>
+</div>
+
+<div class="mapWrap">
+
+<div class="mapTitle">
+どこで起こった？
+</div>
+
+<div class="map">
+
+<svg viewBox="0 0 500 320">
+
+<rect width="500" height="320"
+fill="#f6f6f6"/>
+
+<path
+d="M120 40 L220 20 L320 40 L390 90 L410 170 L350 250 L250 290 L150 260 L100 180 L90 100 Z"
+fill="#ececec"
+stroke="#bbb"
+stroke-width="3"/>
+
+<circle id="uraga" class="point"
+cx="340" cy="205" r="10"/>
+<text x="354" y="209"
+class="pointLabel">浦賀</text>
+
+<circle id="shimoda" class="point"
+cx="300" cy="240" r="10"/>
+<text x="314" y="244"
+class="pointLabel">下田</text>
+
+<circle id="hakodate" class="point"
+cx="380" cy="60" r="10"/>
+<text x="394" y="64"
+class="pointLabel">箱館</text>
+
+<circle id="yokohama" class="point"
+cx="320" cy="185" r="10"/>
+<text x="334" y="189"
+class="pointLabel">横浜</text>
+
+<circle id="edo" class="point"
+cx="310" cy="170" r="10"/>
+<text x="324" y="174"
+class="pointLabel">江戸</text>
+
+<circle id="kagoshima" class="point"
+cx="120" cy="250" r="10"/>
+<text x="134" y="254"
+class="pointLabel">鹿児島</text>
+
+<circle id="shimonoseki" class="point"
+cx="160" cy="200" r="10"/>
+<text x="174" y="204"
+class="pointLabel">下関</text>
+
+</svg>
+
+</div>
+</div>
+
+</div>
+
+<div class="right">
+
+<img id="rabbit"
+src="images/rabbit07.png"
+class="rabbit">
+
+<div id="speech"
+class="speech">
+まずは流れを見よう！
+</div>
+
+</div>
+
+</div>
+
+<div class="quiz">
+
+<div class="status">
+<div id="count"
+class="badge">1 / 6</div>
+
+<div id="score"
+class="badge">正解 0</div>
+</div>
+
+<div id="question"
+class="question"></div>
+
+<div id="choices"
+class="choices"></div>
+
+<div id="learn"
+class="learn"></div>
+
+<div class="next">
+
+<button class="blue"
+onclick="toggleLearn()">
+流れメモ
+</button>
+
+<button id="nextBtn"
+class="red"
+onclick="nextQ()"
+disabled>
+次へ
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 <script>
-const DATA=[
-{year:"1853",phase:"開国の衝撃",event:"ペリー来航",place:"浦賀",region:"kanto",mark:[454,356],q:"1853年に浦賀へ来航し、開国を求めたアメリカ東インド艦隊司令長官はだれか。",a:"ペリー",choices:["ペリー","ハリス","プチャーチン","井伊直弼"],rabbit:"images/rabbit11.png",speech:"黒船ショック！ 幕府うさぎ、海から来た圧にびっくり。",memory:"浦賀に黒船。まずは「外から圧力が来た」と押さえる。",info:"ここから幕府は、外国への対応を迫られていく。"},
-{year:"1854",phase:"開国の衝撃",event:"日米和親条約",place:"神奈川・下田・箱館",region:"tokai",mark:[238,373],q:"日米和親条約で開かれた港の組み合わせはどれか。",a:"下田・箱館",choices:["下田・箱館","横浜・長崎","新潟・兵庫","神奈川・長崎"],rabbit:"images/rabbit06.png",speech:"港を少し開けるだけ……でも、ここから流れが変わる。",memory:"和親条約＝下田・箱館。まずは開港だけ。",info:"貿易開始はまだ。ここでは補給・寄港の色合いが強い。"},
-{year:"1858",phase:"条約と不平等",event:"日米修好通商条約",place:"江戸・神奈川など",region:"kanto",mark:[460,356],q:"日米修好通商条約を結んだアメリカ総領事はだれか。",a:"ハリス",choices:["ハリス","ペリー","プチャーチン","ヒュースケン"],rabbit:"images/rabbit16.png",speech:"今度は貿易開始！ でも不平等条約でもあった。",memory:"修好通商条約＝ハリス。貿易＋不平等。",info:"領事裁判権を認め、関税自主権がなかった点が重要。"},
-{year:"1858",phase:"条約と不平等",event:"安政の五カ国条約",place:"江戸・開港地",region:"kanto",mark:[460,356],q:"安政の五カ国条約が不平等条約とされる理由として正しいものはどれか。",a:"領事裁判権を認めたこと・関税自主権の欠如",choices:["領事裁判権を認めたこと・関税自主権の欠如","鎖国の継続・大船建造の禁止","参勤交代の強化・開港地の閉鎖","勅許の獲得・将軍の上洛"],rabbit:"images/rabbit05.png",speech:"サインしたけど、条件がきつい……幕府の不安が増える。",memory:"不平等＝領事裁判権＋関税自主権なし。",info:"外国人を日本の法律で裁きにくく、関税も自由に決めにくかった。"},
-{year:"1858-1859",phase:"幕府への反発",event:"安政の大獄",place:"江戸・京都",region:"kinki",mark:[126,315],q:"井伊直弼が反対勢力を厳しく処罰した政治弾圧を何というか。",a:"安政の大獄",choices:["安政の大獄","桜田門外の変","文久の改革","坂下門外の変"],rabbit:"images/rabbit14.png",speech:"反対する声はおさえる！ でも反発の火は消えない。",memory:"井伊直弼＝安政の大獄。強い弾圧とセットで覚える。",info:"条約調印や将軍継嗣問題への反対派が処分された。"},
-{year:"1860",phase:"幕府への反発",event:"桜田門外の変",place:"江戸城桜田門",region:"kanto",mark:[460,356],q:"桜田門外の変で暗殺された大老はだれか。",a:"井伊直弼",choices:["井伊直弼","徳川慶喜","松平慶永","島津久光"],rabbit:"images/rabbit09.png",speech:"弾圧への怒りが爆発。雪の桜田門で大事件に。",memory:"人群れ(1860)の中で井伊直弼暗殺。",info:"安政の大獄への反発が、幕府権威の大きな低下につながった。"},
-{year:"1862",phase:"公武合体と攘夷",event:"公武合体",place:"京都・江戸",region:"kinki",mark:[126,315],q:"幕府と朝廷を結びつけて政治を安定させようとする考え方を何というか。",a:"公武合体論",choices:["公武合体論","尊王攘夷論","倒幕論","開国論"],rabbit:"images/rabbit15.png",speech:"幕府と朝廷、手を組めば何とかなる……？",memory:"公＝朝廷、武＝幕府。合体して安定をねらう。",info:"和宮降嫁など、朝廷との結びつきを強める動きが進んだ。"},
-{year:"1862",phase:"公武合体と攘夷",event:"生麦事件",place:"生麦（神奈川）",region:"kanto",mark:[470,372],q:"薩摩藩士がイギリス人を殺傷し、薩英戦争の原因となった事件は何か。",a:"生麦事件",choices:["生麦事件","東禅寺事件","寺田屋事件","イギリス公使館焼打ち事件"],rabbit:"images/rabbit13.png",speech:"小さな接触が、国際問題にふくらむ。",memory:"生麦事件→薩英戦争の原因。",info:"外国人との衝突が、藩の考え方まで変えるきっかけになる。"},
-{year:"1863",phase:"攘夷の爆発",event:"薩英戦争",place:"鹿児島湾",region:"kyushu",mark:[52,432],q:"生麦事件の賠償問題をきっかけに、薩摩藩とイギリスの間で起こった戦争は何か。",a:"薩英戦争",choices:["薩英戦争","下関戦争","アヘン戦争","戊辰戦争"],rabbit:"images/rabbit10.png",speech:"イギリス強い……！ 薩摩うさぎ、西洋の力を知る。",memory:"1863年、薩摩とイギリス。戦って学ぶ。",info:"この経験が、薩摩藩の西洋技術重視へつながっていく。"},
-{year:"1866",phase:"倒幕への準備",event:"慶応の改革",place:"全国",region:"kanto",mark:[450,356],q:"14代将軍徳川家茂の死後、15代将軍となり幕政改革を進めた人物はだれか。",a:"徳川慶喜",choices:["徳川慶喜","徳川家定","徳川家茂","松平慶永"],rabbit:"images/rabbit03.png",speech:"幕府を立て直したい。でも時代の流れはもう大きい。",memory:"最後の将軍＝徳川慶喜。幕府立て直しの改革へ。",info:"この後、倒幕の動きがさらに強まっていく。"}
+
+const FLOW=[
+'ペリー来航',
+'和親条約',
+'ハリス来日',
+'修好通商条約',
+'貿易開始',
+'尊攘事件'
 ];
-let idx=0,answered=false;const done=new Set();const el=id=>document.getElementById(id);function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}function render(){answered=false;const d=DATA[idx];el("countPill").textContent=(idx+1)+"/"+DATA.length;el("yearPill").textContent=d.year;el("placePill").textContent="場所："+d.place;el("question").textContent=d.q;el("phaseName").textContent=d.phase;el("actor").src=d.rabbit;el("bubble").textContent="この出来事は、どこで、何年ごろ起こった？";el("feedback").classList.remove("show");el("nextBtn").style.display="none";el("choices").innerHTML="";shuffle(d.choices).forEach(c=>{const b=document.createElement("button");b.className="choice";b.textContent=c;b.onclick=()=>answer(c,b);el("choices").appendChild(b)});renderTimeline();renderMap();renderList()}function answer(c,button){if(answered)return;answered=true;const d=DATA[idx];[...document.querySelectorAll(".choice")].forEach(b=>{if(b.textContent===d.a)b.classList.add("correct");else if(b===button)b.classList.add("wrong");b.disabled=true});if(c===d.a){done.add(idx);el("fbTitle").textContent="正解！"}else{el("fbTitle").textContent="おしい！ 正解は「"+d.a+"」"}el("fbMemory").textContent="🐰 "+d.memory;el("fbInfo").textContent="プチ情報： "+d.info;el("feedback").classList.add("show");el("bubble").textContent=d.speech;el("nextBtn").style.display="inline-block";renderTimeline();renderMap();renderList()}function renderTimeline(){const t=el("timeline");t.innerHTML="";DATA.forEach((d,i)=>{const n=document.createElement("div");n.className="node"+(done.has(i)?" done":"")+(i===idx?" current":"");n.innerHTML='<div class="dot"></div><span>'+d.year+'<br>'+(done.has(i)||i===idx?d.event:"???")+'</span>';t.appendChild(n)})}function renderMap(){document.querySelectorAll(".region").forEach(r=>{r.classList.remove("active");r.classList.remove("done")});DATA.forEach((d,i)=>{if(done.has(i)){const r=el(d.region);if(r)r.classList.add("done")}});const d=DATA[idx];const r=el(d.region);if(r)r.classList.add("active");const m=el("placeMark");m.setAttribute("cx",d.mark[0]);m.setAttribute("cy",d.mark[1]);m.classList.add("show")}function renderList(){const p=el("progressList");p.innerHTML="";DATA.forEach((d,i)=>{const row=document.createElement("div");row.className="row"+(done.has(i)?" done":"")+(i===idx?" current":"");if(done.has(i)||i===idx){row.textContent=d.year+"｜"+(done.has(i)?d.event:"???")+"｜"+d.place}else{row.innerHTML=d.year+"｜<span class='hiddenAns'>???</span>｜<span class='hiddenAns'>場所は正解後</span>"}p.appendChild(row)})}el("nextBtn").onclick=()=>{if(idx<DATA.length-1){idx++;render()}else{el("question").textContent="トレーニング完了！ 点が線になりました。";el("choices").innerHTML="";el("bubble").textContent="流れが見えた！ 次はアドバンストレーニングで『なぜ？』に進もう。";el("nextBtn").style.display="none"}};el("restartBtn").onclick=()=>{idx=0;done.clear();render()};render();
-</script></body></html>
+
+const DATA=[
+
+{
+q:'ペリーが浦賀へ来航した年は？',
+a:'1853年',
+o:['1853年','1854年','1858年','1860年'],
+flow:'ペリー来航',
+place:['uraga'],
+learn:'1853年、ペリーが浦賀へ来航。ここから日本は開国へ向かっていく。'
+},
+
+{
+q:'1854年に結ばれた条約は？',
+a:'日米和親条約',
+o:['日米和親条約','日米修好通商条約','天津条約','日露修好通商条約'],
+flow:'和親条約',
+place:['shimoda','hakodate'],
+learn:'和親条約で下田・箱館が開港。「まず仲良く」の段階。'
+},
+
+{
+q:'下田に来たアメリカ総領事は？',
+a:'ハリス',
+o:['ハリス','ペリー','ヒュースケン','プチャーチン'],
+flow:'ハリス来日',
+place:['shimoda'],
+learn:'ハリスは下田へ。ここから通商条約への圧力が始まる。'
+},
+
+{
+q:'1858年に結ばれた条約は？',
+a:'日米修好通商条約',
+o:['日米修好通商条約','日米和親条約','安政の五カ国条約','天津条約'],
+flow:'修好通商条約',
+place:['yokohama'],
+learn:'修好通商条約で本格的な貿易へ。不平等条約として重要。'
+},
+
+{
+q:'1860年に起きた事件は？',
+a:'桜田門外の変',
+o:['桜田門外の変','坂下門外の変','生麦事件','東禅寺事件'],
+flow:'尊攘事件',
+place:['edo'],
+learn:'安政の大獄への反発が、桜田門外の変へ。'
+},
+
+{
+q:'1863年に起きた戦争は？',
+a:'薩英戦争',
+o:['薩英戦争','下関戦争','戊辰戦争','西南戦争'],
+flow:'尊攘事件',
+place:['kagoshima'],
+learn:'薩摩は薩英戦争で、西洋軍事力の強さを知る。'
+}
+
+];
+
+let idx=0;
+let score=0;
+let locked=false;
+
+function shuffle(a){
+return [...a].sort(()=>Math.random()-.5);
+}
+
+function renderFlow(active){
+
+const flow=document.getElementById('flow');
+
+flow.innerHTML='';
+
+FLOW.forEach(x=>{
+
+const d=document.createElement('div');
+
+d.className='node'+
+(x===active?' active':'');
+
+d.textContent=x;
+
+flow.appendChild(d);
+
+});
+
+}
+
+function clearMap(){
+
+document.querySelectorAll('.point')
+.forEach(x=>x.classList.remove('active'));
+
+}
+
+function lightMap(list){
+
+clearMap();
+
+list.forEach(id=>{
+
+const el=document.getElementById(id);
+
+if(el)el.classList.add('active');
+
+});
+
+}
+
+function showQ(){
+
+locked=false;
+
+const item=DATA[idx];
+
+document.getElementById('count')
+.textContent=
+`${idx+1} / ${DATA.length}`;
+
+document.getElementById('score')
+.textContent=
+`正解 ${score}`;
+
+document.getElementById('question')
+.textContent=item.q;
+
+document.getElementById('learn')
+.classList.remove('show');
+
+document.getElementById('nextBtn')
+.disabled=true;
+
+renderFlow(item.flow);
+
+lightMap(item.place);
+
+const box=document.getElementById('choices');
+
+box.innerHTML='';
+
+shuffle(item.o).forEach(opt=>{
+
+const b=document.createElement('button');
+
+b.className='choice';
+
+b.textContent=opt;
+
+b.onclick=()=>answer(b,opt,item);
+
+box.appendChild(b);
+
+});
+
+}
+
+function answer(btn,opt,item){
+
+if(locked)return;
+
+locked=true;
+
+document.querySelectorAll('.choice')
+.forEach(b=>{
+
+if(b.textContent===item.a){
+
+b.classList.add('correct');
+
+}
+
+});
+
+if(opt===item.a){
+
+score++;
+
+document.getElementById('speech')
+.innerHTML='その流れだ！';
+
+document.getElementById('rabbit')
+.src='images/rabbit16.png';
+
+}else{
+
+btn.classList.add('wrong');
+
+document.getElementById('speech')
+.innerHTML='ここで流れを確認！';
+
+document.getElementById('rabbit')
+.src='images/rabbit09.png';
+
+}
+
+document.getElementById('score')
+.textContent=`正解 ${score}`;
+
+document.getElementById('learn')
+.innerHTML=item.learn;
+
+document.getElementById('learn')
+.classList.add('show');
+
+document.getElementById('nextBtn')
+.disabled=false;
+
+}
+
+function nextQ(){
+
+idx++;
+
+if(idx>=DATA.length){
+
+finish();
+
+return;
+
+}
+
+showQ();
+
+}
+
+function finish(){
+
+document.querySelector('.quiz')
+.innerHTML=`
+
+<div style="text-align:center;padding:20px">
+
+<img src="images/rabbit01.png"
+class="rabbit"
+style="max-width:220px">
+
+<h2 style="
+font-size:54px;
+margin:10px 0">
+トレーニング完了！
+</h2>
+
+<div style="
+font-size:42px;
+font-weight:900;
+color:#b71c1c">
+${score}/${DATA.length}
+</div>
+
+<p style="
+font-size:22px;
+font-weight:800;
+line-height:1.7">
+
+次はアドバンストレーニングで、<br>
+「なぜ変化したか」を理解しよう。
+
+</p>
+
+<div style="
+display:flex;
+gap:10px;
+justify-content:center;
+flex-wrap:wrap;
+margin-top:20px">
+
+<button class="blue"
+onclick="location.href='index3.html'">
+アドバンスへ
+</button>
+
+<button class="red"
+onclick="location.href='index.html'">
+通常クイズへ
+</button>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+function toggleLearn(){
+
+document.getElementById('learn')
+.classList.toggle('show');
+
+}
+
+showQ();
+
+</script>
+
+</body>
+</html>
